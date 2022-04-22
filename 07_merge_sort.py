@@ -9,6 +9,11 @@ from data.nomes_desord import nomes
 from time import time
 import tracemalloc
 
+#from downloads.emp10mil import empresas
+#from downloads.emp25mil import empresas
+#from downloads.emp50mil import empresas
+from downloads.emp100mil import empresas
+
 divs = juncoes = comps = 0
 
 def merge_sort(lista):
@@ -67,25 +72,24 @@ def merge_sort(lista):
 
 ###############################################################
 
-nums = [7, 4, 2, 9, 0, 6, 5, 3, 1, 8]
-# nums = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-# nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-resultado = merge_sort(nums)
-print(resultado)
-print(f"Divisões: {divs}, comparações: {comps}, junções: {juncoes}")
+# nums = [7, 4, 2, 9, 0, 6, 5, 3, 1, 8]
+# # nums = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+# # nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+# resultado = merge_sort(nums)
+# print(resultado)
+# print(f"Divisões: {divs}, comparações: {comps}, junções: {juncoes}")
 
 divs = juncoes = comps = 0
 
 hora_ini = time()
 tracemalloc.start() # Inicia o monitoramento da memória
 
-nomes_ord = merge_sort(nomes)
+nomes_ord = merge_sort(empresas)
 
 # Captura as estatísticas de uso da memória
 mem_atual, mem_pico = tracemalloc.get_traced_memory()
 hora_fim = time()
 
-print(nomes_ord[:100]) # Imprime só os 100 primeiros nomes
 
 print(f"Tempo gasto para ordenar: {(hora_fim - hora_ini) * 1000}ms")
 print(f"Pico de memória: { mem_pico / 1024 / 1024 } MB")

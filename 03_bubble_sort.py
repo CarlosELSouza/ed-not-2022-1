@@ -7,6 +7,12 @@
 
 from data.nomes_desord import nomes
 from time import time
+import tracemalloc
+
+# from downloads.emp10mil import empresas
+#from downloads.emp25mil import empresas
+from downloads.emp50mil import empresas
+# from downloads.emp100mil import empresas
 
 passadas = comps = trocas = 0
 
@@ -35,17 +41,21 @@ def bubble_sort(lista):
 
 ########################################################################        
 
-#nums = [7, 4, 2, 9, 0, 6, 5, 3, 1, 8]
-#nums = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-# nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
 nums = [7, 4, 2, 9, 0, 6, 8, 3, 1, 5]
-bubble_sort(nums)
-print(nums)
+
+hora_ini = time()
+tracemalloc.start()
+
+bubble_sort(empresas)
+
+mem_atual, mem_pico = tracemalloc.get_traced_memory()
+hora_fim = time()
+
+print(f"Tempo gasto para ordenar: {(hora_fim - hora_ini) * 1000}ms")
+print(f"Pico de memória: { mem_pico / 1024 / 1024 } MB")
 print(f"passadas: {passadas}, comparações: {comps}, trocas: {trocas}")
 
-# hora_ini = time()
-# bubble_sort(nomes)
-# hora_fim = time()
-# print(f"Tempo gasto para ordenar: {(hora_fim - hora_ini) * 1000}ms")
-# print(nomes)
-# print(f"passadas: {passadas}, comparações: {comps}, trocas: {trocas}")
+
+
+

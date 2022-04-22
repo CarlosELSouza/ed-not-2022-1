@@ -10,6 +10,12 @@
 
 from data.nomes_desord import nomes
 from time import time
+import tracemalloc
+
+from downloads.emp10mil import empresas
+#from downloads.emp25mil import empresas
+#from downloads.emp50mil import empresas
+#from downloads.emp100mil import empresas
 
 passadas = comps = trocas = 0
 
@@ -57,13 +63,16 @@ nums = [7, 4, 2, 9, 0, 6, 8, 3, 1, 5]
 # Melhor caso
 # nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-selection_sort(nums)
-print(nums)     
-print(f"passadas: {passadas}, comparações: {comps}, trocas: {trocas}")  
+# selection_sort(nums)
+# print(nums)     
+# print(f"passadas: {passadas}, comparações: {comps}, trocas: {trocas}")  
 
-# hora_ini = time()
-# selection_sort(nomes)
-# hora_fim = time()
-# print(f"Tempo gasto para ordenar: {(hora_fim - hora_ini) * 1000}ms")
-# print(nomes)
-# print(f"passadas: {passadas}, comparações: {comps}, trocas: {trocas}")
+hora_ini = time()
+tracemalloc.start() # Inicia o monitoramento da memória
+selection_sort(empresas)
+mem_atual, mem_pico = tracemalloc.get_traced_memory()
+hora_fim = time()
+
+print(f"Pico de memória: { mem_pico / 1024 / 1024 } MB")
+print(f"Tempo gasto para ordenar: {(hora_fim - hora_ini) * 1000}ms")
+print(f"passadas: {passadas}, comparações: {comps}, trocas: {trocas}")
