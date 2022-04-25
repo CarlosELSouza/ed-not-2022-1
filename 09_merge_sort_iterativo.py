@@ -1,3 +1,14 @@
+
+
+from time import time
+import tracemalloc
+
+#from downloads.emp10mil import empresas
+#from downloads.emp25mil import empresas
+#from downloads.emp50mil import empresas
+from downloads.emp100mil import empresas
+
+
 def merge_sort(lista):
     """
         Função que implementa o algoritmo Merge Sort de forma ITERATIVA
@@ -59,8 +70,15 @@ def merge_sort(lista):
 
 ############################################################
 
-nums = [88, 44, 33, 0, 99, 55, 77, 22, 11, 66]
+hora_ini = time()
+tracemalloc.start() # Inicia o monitoramento da memória
 
-nums_ord = merge_sort(nums)
+nomes_ord = merge_sort(empresas)
 
-print(nums_ord)
+# Captura as estatísticas de uso da memória
+mem_atual, mem_pico = tracemalloc.get_traced_memory()
+hora_fim = time()
+
+
+print(f"Tempo gasto para ordenar: {(hora_fim - hora_ini) * 1000}ms")
+print(f"Pico de memória: { mem_pico / 1024 / 1024 } MB")

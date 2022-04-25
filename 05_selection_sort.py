@@ -12,10 +12,10 @@ from data.nomes_desord import nomes
 from time import time
 import tracemalloc
 
-from downloads.emp10mil import empresas
+#from downloads.emp10mil import empresas
 #from downloads.emp25mil import empresas
 #from downloads.emp50mil import empresas
-#from downloads.emp100mil import empresas
+from downloads.emp100mil import empresas
 
 passadas = comps = trocas = 0
 
